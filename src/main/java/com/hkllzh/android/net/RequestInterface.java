@@ -1,16 +1,16 @@
 package com.hkllzh.android.net;
 
 /**
- * TODO
+ * 请求者，请求执行者。
  * <p/>
  * lizheng -- 2015/08/23
  * <p/>
  * FastWeiB
  */
 public interface RequestInterface {
-    void execute(ApiInterface ApiInterface, final ResponseHandler handler);
+    void execute(API api, ResponseInterface handler);
 
-    void cancel(ApiInterface ApiInterface);
+    void cancel(API api);
 
     void cancelAll();
 }

@@ -1,13 +1,13 @@
 package com.hkllzh.android.net;
 
 /**
- * 一个请求，也叫一个API
+ * 一个Api。定义这个请求，不包含动作<br/>
  * <p/>
  * lizheng -- 2015/08/23
  * <p/>
  * FastWeiB
  */
-public interface ApiInterface {
+public interface API {
 
     /**
      * 返回请求URL
@@ -32,7 +32,7 @@ public interface ApiInterface {
     boolean isShowLog();
 
     /**
-     * 是否使用缓存，适用于{@link ApiInterface.RequestMethod#GET}请求
+     * 是否使用缓存，适用于{@link API.RequestMethod#GET}请求
      *
      * @return true 使用、false 不使用
      */

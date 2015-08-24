@@ -1,5 +1,6 @@
-package com.hkllzh.android.net;
+package com.hkllzh.android.net.okhttp;
 
+import com.hkllzh.android.net.ResponseInterface;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
@@ -12,12 +13,7 @@ import java.io.IOException;
  * <p/>
  * FastWeiB
  */
-public abstract class ResponseHandler {
-
-    public abstract void failed(String errorInfo);
-
-    public abstract void success(String success);
-
+public abstract class OkHttpResponse implements ResponseInterface {
 
     public void onFailure(Request request, IOException e) {
 

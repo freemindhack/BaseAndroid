@@ -1,7 +1,10 @@
-package com.hkllzh.android.net;
+package com.hkllzh.android.net.okhttp;
 
 import android.support.v4.util.ArrayMap;
 
+import com.hkllzh.android.net.API;
+import com.hkllzh.android.net.RequestInterface;
+import com.hkllzh.android.net.ResponseInterface;
 import com.hkllzh.android.util.md5.MD5Util;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.HttpUrl;
@@ -23,14 +26,14 @@ import okio.BufferedSink;
  * <p/>
  * FastWeiB
  */
-public abstract class AbstractRequest implements RequestInterface {
+public abstract class OkHttpRequest implements RequestInterface {
     public abstract OkHttpClient getOkHttpClient();
 
     private HashSet<String> tags;
 
     @Override
-    public void execute(ApiInterface api, final ResponseHandler handler) {
-
+    public void execute(API api, ResponseInterface responseInterface) {
+        final OkHttpResponse handler = (OkHttpResponse) responseInterface;
         if (null == tags) {
             tags = new HashSet<>();
         }
@@ -82,7 +85,7 @@ public abstract class AbstractRequest implements RequestInterface {
     }
 
     @Override
-    public void cancel(ApiInterface api) {
+    public void cancel(API api) {
         tags.remove(MD5Util.generate(api.getRequestURL()));
         getOkHttpClient().cancel(MD5Util.generate(api.getRequestURL()));
     }
@@ -95,7 +98,7 @@ public abstract class AbstractRequest implements RequestInterface {
         tags.clear();
     }
 
-    private HttpUrl getHttpUrl(ApiInterface api) {
+    private HttpUrl getHttpUrl(API api) {
         HttpUrl httpUrl = HttpUrl.parse(api.getRequestURL());
         HttpUrl.Builder builder = httpUrl.newBuilder();
 
@@ -108,7 +111,7 @@ public abstract class AbstractRequest implements RequestInterface {
         return builder.build();
     }
 
-    protected ArrayMap<String, String> getUrlParams(ApiInterface api) {
+    protected ArrayMap<String, String> getUrlParams(API api) {
         return api.getRequestParams().getRequestParams();
     }
 }

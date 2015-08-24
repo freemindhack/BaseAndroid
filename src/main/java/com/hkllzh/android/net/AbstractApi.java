@@ -3,13 +3,13 @@ package com.hkllzh.android.net;
 import com.hkllzh.android.util.datetime.TimeConstant;
 
 /**
- * 基本的请求者
+ * 一个请求的默认定义
  * <p/>
  * lizheng -- 2015/08/23
  * <p/>
  * FastWeiB
  */
-public abstract class AbstractApi implements ApiInterface {
+public abstract class AbstractApi implements API {
 
     private static final long DEFAULT_CACHE_TIME = TimeConstant.ONE_DAY_SECOND;
 
@@ -21,12 +21,6 @@ public abstract class AbstractApi implements ApiInterface {
 
     @Override
     public abstract RequestParams getRequestParams();
-
-    public abstract RequestInterface getBaseRequest();
-
-    public void execute(final ResponseHandler handler) {
-        getBaseRequest().execute(this, handler);
-    }
 
     @Override
     public boolean isShowLog() {
