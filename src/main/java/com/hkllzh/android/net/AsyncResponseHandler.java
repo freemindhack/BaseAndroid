@@ -18,7 +18,6 @@ public abstract class AsyncResponseHandler implements ResponseInterface {
     protected static final int FINISH_MESSAGE = 3;
 
     private Handler handler;
-    private Looper looper = null;
 
     /**
      * Creates a new AsyncResponseHandler
@@ -37,10 +36,9 @@ public abstract class AsyncResponseHandler implements ResponseInterface {
     public AsyncResponseHandler(Looper looper) {
 
         log = new LogHandler();
-
-        this.looper = looper == null ? Looper.myLooper() : looper;
-        handler = new ResponderHandler(this, this.looper);
-
+        handler = new ResponderHandler(this, Looper.myLooper());
+        Handler handler2 = new Handler();
+        Handler handler3 = new Handler();
     }
 
     /**
@@ -66,19 +64,19 @@ public abstract class AsyncResponseHandler implements ResponseInterface {
     }
 
     final public void sendSuccessMessage(String response) {
-        sendMessage(obtainMessage(SUCCESS_MESSAGE, response));
+        handler.sendMessage(obtainMessage(SUCCESS_MESSAGE, response));
     }
 
     final public void sendFailureMessage(String failedMessage) {
-        sendMessage(obtainMessage(FAILURE_MESSAGE, failedMessage));
+        handler.sendMessage(obtainMessage(FAILURE_MESSAGE, failedMessage));
     }
 
     final public void sendStartMessage() {
-        sendMessage(obtainMessage(START_MESSAGE, null));
+        handler.sendMessage(obtainMessage(START_MESSAGE, null));
     }
 
     final public void sendFinishMessage() {
-        sendMessage(obtainMessage(FINISH_MESSAGE, null));
+        handler.sendMessage(obtainMessage(FINISH_MESSAGE, null));
     }
 
 
