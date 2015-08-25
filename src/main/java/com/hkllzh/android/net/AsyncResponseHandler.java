@@ -39,7 +39,7 @@ public abstract class AsyncResponseHandler implements ResponseInterface {
         log = new LogHandler();
 
         this.looper = looper == null ? Looper.myLooper() : looper;
-        handler = new ResponderHandler(this, looper);
+        handler = new ResponderHandler(this, this.looper);
 
     }
 
