@@ -8,9 +8,9 @@ package com.hkllzh.android.net;
  * FastWeiB
  */
 public interface RequestInterface {
-    void execute(API api, ResponseInterface handler);
+    void execute(APIInterface api, ResponseInterface handler);
 
-    void cancel(API api);
+    void cancel(APIInterface api);
 
     void cancelAll();
 }

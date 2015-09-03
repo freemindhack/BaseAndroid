@@ -1,5 +1,7 @@
-package com.hkllzh.android.net;
+package com.hkllzh.android.net.impl;
 
+import com.hkllzh.android.net.APIInterface;
+import com.hkllzh.android.net.RequestParams;
 import com.hkllzh.android.util.datetime.TimeConstant;
 
 /**
@@ -9,18 +11,18 @@ import com.hkllzh.android.util.datetime.TimeConstant;
  * <p/>
  * FastWeiB
  */
-public abstract class AbstractApi implements API {
+public abstract class AbstractApiImpl implements APIInterface {
 
     private static final long DEFAULT_CACHE_TIME = TimeConstant.ONE_DAY_UNIT_SECOND;
 
     @Override
-    public abstract String getRequestURL();
+    public abstract String requestURL();
 
     @Override
-    public abstract RequestMethod getRequestMethod();
+    public abstract RequestMethod requestMethod();
 
     @Override
-    public abstract RequestParams getRequestParams();
+    public abstract RequestParams requestParams();
 
     @Override
     public boolean isShowLog() {
@@ -33,7 +35,7 @@ public abstract class AbstractApi implements API {
     }
 
     @Override
-    public long getCacheTime() {
+    public long cacheTime() {
         return DEFAULT_CACHE_TIME;
     }
 }

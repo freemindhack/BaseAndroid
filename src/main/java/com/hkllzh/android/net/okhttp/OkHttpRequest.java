@@ -2,9 +2,9 @@ package com.hkllzh.android.net.okhttp;
 
 import android.support.v4.util.ArrayMap;
 
-import com.hkllzh.android.net.API;
-import com.hkllzh.android.net.RequestInterface;
+import com.hkllzh.android.net.APIInterface;
 import com.hkllzh.android.net.ResponseInterface;
+import com.hkllzh.android.net.impl.AbstractRequestImpl;
 import com.hkllzh.android.util.md5.MD5Util;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.HttpUrl;
@@ -18,19 +18,19 @@ import java.io.IOException;
 import java.util.HashSet;
 
 /**
- * 网络请求类
+ * 基于{@link OkHttpClient}实现的网络请求类
  * <p/>
  * lizheng -- 2015/08/23
  * <p/>
  * FastWeiB
  */
-public abstract class OkHttpRequest implements RequestInterface {
+public abstract class OkHttpRequest extends AbstractRequestImpl {
     public abstract OkHttpClient getOkHttpClient();
 
     private HashSet<String> tags;
 
     @Override
-    public void execute(API api, ResponseInterface responseInterface) {
+    public void execute(APIInterface api, ResponseInterface responseInterface) {
         final OkHttpResponse okHttpResponse = (OkHttpResponse) responseInterface;
 
         okHttpResponse.sendStartMessage();
@@ -38,9 +38,9 @@ public abstract class OkHttpRequest implements RequestInterface {
         if (null == tags) {
             tags = new HashSet<>();
         }
-        tags.add(MD5Util.generate(api.getRequestURL()));
+        tags.add(MD5Util.generate(api.requestURL()));
         Request request = null;
-        switch (api.getRequestMethod()) {
+        switch (api.requestMethod()) {
             case GET:
                 request = get(api);
                 break;
@@ -72,9 +72,9 @@ public abstract class OkHttpRequest implements RequestInterface {
     }
 
     @Override
-    public void cancel(API api) {
-        tags.remove(MD5Util.generate(api.getRequestURL()));
-        getOkHttpClient().cancel(MD5Util.generate(api.getRequestURL()));
+    public void cancel(APIInterface api) {
+        tags.remove(MD5Util.generate(api.requestURL()));
+        getOkHttpClient().cancel(MD5Util.generate(api.requestURL()));
     }
 
     @Override
@@ -85,33 +85,46 @@ public abstract class OkHttpRequest implements RequestInterface {
         tags.clear();
     }
 
-    private Request get(API api) {
+    private Request get(APIInterface api) {
         return new Request.Builder()
                 .url(getHttpUrl(api))
-                .tag(MD5Util.generate(api.getRequestURL()))
+                .tag(MD5Util.generate(api.requestURL()))
                 .get()
                 .build();
     }
 
-    private Request post(API api) {
-        MultipartBuilder multipartBuilder = new MultipartBuilder();
+    private Request post(APIInterface api) {
+        MultipartBuilder builder = new MultipartBuilder();
 
-
-        ArrayMap<String, String> ps = api.getRequestParams().getRequestParams();
+        ArrayMap<String, String> ps = api.requestParams().getRequestParams();
         for (String k : ps.keySet()) {
-            multipartBuilder = multipartBuilder.addFormDataPart(k, ps.get(k));
+            builder = builder.addFormDataPart(k, ps.get(k));
         }
 
-        RequestBody requestBody = multipartBuilder.build();
+        if (null != getDefaultPostParams()) {
+            ArrayMap<String, String> postParams = getDefaultPostParams();
+            for (String k : postParams.keySet()) {
+                builder = builder.addFormDataPart(k, ps.get(k));
+            }
+        }
+
+
+        RequestBody requestBody = builder.build();
         return new Request.Builder()
                 .url(getHttpUrl(api))
-                .tag(MD5Util.generate(api.getRequestURL()))
+                .tag(MD5Util.generate(api.requestURL()))
                 .post(requestBody)
                 .build();
     }
 
-    private HttpUrl getHttpUrl(API api) {
-        HttpUrl httpUrl = HttpUrl.parse(api.getRequestURL());
+    /**
+     * 返回完整的http url
+     *
+     * @param api 请求Api
+     * @return {@link HttpUrl}
+     */
+    private HttpUrl getHttpUrl(APIInterface api) {
+        HttpUrl httpUrl = HttpUrl.parse(api.requestURL());
         HttpUrl.Builder builder = httpUrl.newBuilder();
 
         if (null != getDefaultUrlParams()) {
@@ -121,17 +134,13 @@ public abstract class OkHttpRequest implements RequestInterface {
             }
         }
 
-        if (api.getRequestMethod() == API.RequestMethod.GET) {
-            ArrayMap<String, String> ps = api.getRequestParams().getRequestParams();
+        if (api.requestMethod() == APIInterface.RequestMethod.GET) {
+            ArrayMap<String, String> ps = api.requestParams().getRequestParams();
             for (String k : ps.keySet()) {
                 builder = builder.addQueryParameter(k, ps.get(k));
             }
         }
 
         return builder.build();
-    }
-
-    protected ArrayMap<String, String> getDefaultUrlParams() {
-        return null;
     }
 }

@@ -1,15 +1,16 @@
-package com.hkllzh.android.net;
+package com.hkllzh.android.net.impl;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.hkllzh.android.net.ResponseInterface;
 import com.hkllzh.android.util.log.LogHandler;
 
 
-public abstract class AsyncResponseHandler implements ResponseInterface {
+public abstract class AbstractAsyncResponseImpl implements ResponseInterface {
 
-    private static final String LOG_TAG = "AsyncResponseHandler";
+    private static final String LOG_TAG = "AbstractAsyncResponseImpl";
     private LogHandler log;
 
     protected static final int SUCCESS_MESSAGE = 0;
@@ -19,7 +20,7 @@ public abstract class AsyncResponseHandler implements ResponseInterface {
 
     private Handler handler;
 
-    public AsyncResponseHandler() {
+    public AbstractAsyncResponseImpl() {
         log = new LogHandler();
         handler = new ResponderHandler(this, Looper.myLooper());
     }
@@ -28,9 +29,9 @@ public abstract class AsyncResponseHandler implements ResponseInterface {
      * Avoid leaks by using a non-anonymous handler class.
      */
     private static class ResponderHandler extends Handler {
-        private final AsyncResponseHandler mResponder;
+        private final AbstractAsyncResponseImpl mResponder;
 
-        ResponderHandler(AsyncResponseHandler mResponder, Looper looper) {
+        ResponderHandler(AbstractAsyncResponseImpl mResponder, Looper looper) {
             super(looper);
             this.mResponder = mResponder;
         }

@@ -7,22 +7,22 @@ package com.hkllzh.android.net;
  * <p/>
  * FastWeiB
  */
-public interface API {
+public interface APIInterface {
 
     /**
      * 返回请求URL
      */
-    String getRequestURL();
+    String requestURL();
 
     /**
      * 返回请求方法
      */
-    RequestMethod getRequestMethod();
+    RequestMethod requestMethod();
 
     /**
      * 返回请求参数列表
      */
-    RequestParams getRequestParams();
+    RequestParams requestParams();
 
     /**
      * 是否打印请求信息至log
@@ -32,7 +32,7 @@ public interface API {
     boolean isShowLog();
 
     /**
-     * 是否使用缓存，适用于{@link API.RequestMethod#GET}请求
+     * 是否使用缓存，适用于{@link APIInterface.RequestMethod#GET}请求
      *
      * @return true 使用、false 不使用
      */
@@ -43,7 +43,7 @@ public interface API {
      *
      * @return 缓存时间，秒为单位
      */
-    long getCacheTime();
+    long cacheTime();
 
 
     enum RequestMethod {
