@@ -11,7 +11,7 @@ import com.hkllzh.android.util.datetime.TimeConstant;
  */
 public abstract class AbstractApi implements API {
 
-    private static final long DEFAULT_CACHE_TIME = TimeConstant.ONE_DAY_SECOND;
+    private static final long DEFAULT_CACHE_TIME = TimeConstant.ONE_DAY_UNIT_SECOND;
 
     @Override
     public abstract String getRequestURL();

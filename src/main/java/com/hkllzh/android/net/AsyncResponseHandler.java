@@ -19,26 +19,9 @@ public abstract class AsyncResponseHandler implements ResponseInterface {
 
     private Handler handler;
 
-    /**
-     * Creates a new AsyncResponseHandler
-     */
     public AsyncResponseHandler() {
-        this(null);
-    }
-
-    /**
-     * Creates a new AsyncResponseHandler with a user-supplied looper. If
-     * the passed looper is null, the looper attached to the current thread will
-     * be used.
-     *
-     * @param looper The looper to work with
-     */
-    public AsyncResponseHandler(Looper looper) {
-
         log = new LogHandler();
         handler = new ResponderHandler(this, Looper.myLooper());
-        Handler handler2 = new Handler();
-        Handler handler3 = new Handler();
     }
 
     /**
@@ -102,10 +85,6 @@ public abstract class AsyncResponseHandler implements ResponseInterface {
         } catch (Throwable error) {
             onUserException(error);
         }
-    }
-
-    protected void sendMessage(Message msg) {
-        handleMessage(msg);
     }
 
     /**

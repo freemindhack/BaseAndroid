@@ -1,6 +1,5 @@
 package com.hkllzh.android.net.okhttp;
 
-import android.os.Looper;
 import android.support.v4.util.ArrayMap;
 
 import com.hkllzh.android.net.API;
