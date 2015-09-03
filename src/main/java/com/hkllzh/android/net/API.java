@@ -47,6 +47,13 @@ public interface API {
 
 
     enum RequestMethod {
-        GET, POST
+        /**
+         * Get请求
+         */
+        GET,
+        /**
+         * Post请求
+         */
+        POST
     }
 }
