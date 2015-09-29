@@ -8,6 +8,10 @@ import com.hkllzh.android.net.ResponseInterface;
 import com.hkllzh.android.util.log.LogHandler;
 
 
+/**
+ * 参考了开源项目（<a href="https://github.com/loopj/android-async-http">android-async-http</a>）中的<a href="https://github.com/loopj/android-async-http/blob/master/library/src/main/java/com/loopj/android/http/AsyncHttpResponseHandler.java">AsyncHttpResponseHandler</a>的一些实现
+ * 删除了一些细节，之后会慢慢加上。
+ */
 public abstract class AbstractAsyncResponseImpl implements ResponseInterface {
 
     private static final String LOG_TAG = "AbstractAsyncResponseImpl";

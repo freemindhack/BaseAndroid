@@ -5,11 +5,9 @@ import android.support.v4.util.ArrayMap;
 import com.hkllzh.android.net.RequestInterface;
 
 /**
- * TODO
+ * 请求的一个默认抽象实现
  * <p/>
  * lizheng -- 2015/09/03
- * <p/>
- * FastWeiB
  */
 public abstract class AbstractRequestImpl implements RequestInterface {
     /**
