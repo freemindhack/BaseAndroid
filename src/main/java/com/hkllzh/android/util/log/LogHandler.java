@@ -6,8 +6,17 @@ import android.util.Log;
 
 public class LogHandler implements LogInterface {
 
-    boolean mLoggingEnabled = true;
-    int mLoggingLevel = VERBOSE;
+    private static LogHandler logHandler = new LogHandler();
+
+    private LogHandler() {
+    }
+
+    public static LogHandler getInstance() {
+        return logHandler;
+    }
+
+    private boolean mLoggingEnabled = true;
+    private int mLoggingLevel = VERBOSE;
 
     @Override
     public boolean isLoggingEnabled() {
