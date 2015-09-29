@@ -18,17 +18,19 @@ import com.hkllzh.android.util.sharedpreferences.SPUtil;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    protected static final LogInterface log;
+    private static final LogInterface _log;
     protected static final SPUtil spUtil;
     protected static final int W_PX;
     protected static final int H_PX;
 
     static {
-        log = LogHandler.getInstance();
+        _log = LogHandler.getInstance();
         spUtil = SPUtil.getInstance();
         W_PX = spUtil.getInt(C.SP.SCREEN_WIDTH, 0);
         H_PX = spUtil.getInt(C.SP.SCREEN_HEIGHT, 0);
     }
+
+    protected LogInterface log;
 
     protected Activity mActivity;
 
@@ -36,5 +38,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = this;
+        log = _log;
     }
 }
