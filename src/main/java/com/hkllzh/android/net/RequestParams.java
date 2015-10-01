@@ -39,4 +39,10 @@ public class RequestParams {
         return urlParams;
     }
 
+    @Override
+    public String toString() {
+        return "RequestParams{" +
+                "urlParams=" + urlParams +
+                '}';
+    }
 }

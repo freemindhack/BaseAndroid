@@ -33,6 +33,8 @@ public interface APIInterface {
 
     /**
      * 是否使用缓存，适用于{@link APIInterface.RequestMethod#GET}请求
+     * 此缓存使用的本地缓存，不涉及到http的一些属性。
+     * 如果可以使用缓存，这次请求将不再有网络请求
      *
      * @return true 使用、false 不使用
      */

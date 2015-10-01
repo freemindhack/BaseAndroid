@@ -5,11 +5,9 @@ import com.hkllzh.android.net.RequestParams;
 import com.hkllzh.android.util.datetime.TimeConstant;
 
 /**
- * 一个请求的默认定义
+ * 一个请求的默认抽象实现
  * <p/>
  * lizheng -- 2015/08/23
- * <p/>
- * FastWeiB
  */
 public abstract class AbstractApiImpl implements APIInterface {
 

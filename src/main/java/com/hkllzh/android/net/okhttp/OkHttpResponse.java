@@ -8,7 +8,8 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 
 /**
- * 基于{@link OkHttpClient}实现的网络请求相应类
+ * 基于{@link OkHttpClient}实现的网络请求相应类<br>
+ * 对应的请求类为{@link OkHttpRequest}
  * <p/>
  * lizheng -- 2015/08/23
  * <p/>

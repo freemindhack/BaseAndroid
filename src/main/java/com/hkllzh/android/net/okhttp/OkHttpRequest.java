@@ -18,7 +18,8 @@ import java.io.IOException;
 import java.util.HashSet;
 
 /**
- * 基于{@link OkHttpClient}实现的网络请求类
+ * 基于{@link OkHttpClient}实现的网络请求类<br>
+ * 对应的响应类为{@link OkHttpResponse}
  * <p/>
  * lizheng -- 2015/08/23
  * <p/>
@@ -27,6 +28,7 @@ import java.util.HashSet;
 public abstract class OkHttpRequest extends AbstractRequestImpl {
     public abstract OkHttpClient getOkHttpClient();
 
+    // 记录所有请求的标记
     private HashSet<String> tags;
 
     @Override
@@ -38,8 +40,8 @@ public abstract class OkHttpRequest extends AbstractRequestImpl {
         if (null == tags) {
             tags = new HashSet<>();
         }
-        tags.add(MD5Util.generate(api.requestURL()));
-        Request request = null;
+        tags.add(generateApiTag(api));
+        Request request;
         switch (api.requestMethod()) {
             case GET:
                 request = get(api);
@@ -53,7 +55,7 @@ public abstract class OkHttpRequest extends AbstractRequestImpl {
         }
 
         if (null == request) {
-            okHttpResponse.sendFailureMessage("请求为空");
+            okHttpResponse.sendFailureMessage("无法生成请求！");
             okHttpResponse.sendFinishMessage();
             return;
         }
@@ -73,8 +75,8 @@ public abstract class OkHttpRequest extends AbstractRequestImpl {
 
     @Override
     public void cancel(APIInterface api) {
-        tags.remove(MD5Util.generate(api.requestURL()));
-        getOkHttpClient().cancel(MD5Util.generate(api.requestURL()));
+        tags.remove(generateApiTag(api));
+        getOkHttpClient().cancel(generateApiTag(api));
     }
 
     @Override
@@ -85,14 +87,26 @@ public abstract class OkHttpRequest extends AbstractRequestImpl {
         tags.clear();
     }
 
+    /**
+     * 生成{@link com.hkllzh.android.net.APIInterface.RequestMethod#GET}请求的{@link Request}
+     *
+     * @param api
+     * @return
+     */
     private Request get(APIInterface api) {
         return new Request.Builder()
                 .url(getHttpUrl(api))
-                .tag(MD5Util.generate(api.requestURL()))
+                .tag(generateApiTag(api))
                 .get()
                 .build();
     }
 
+    /**
+     * 生成{@link com.hkllzh.android.net.APIInterface.RequestMethod#POST}请求的{@link Request}
+     *
+     * @param api
+     * @return
+     */
     private Request post(APIInterface api) {
         MultipartBuilder builder = new MultipartBuilder();
 
@@ -112,7 +126,7 @@ public abstract class OkHttpRequest extends AbstractRequestImpl {
         RequestBody requestBody = builder.build();
         return new Request.Builder()
                 .url(getHttpUrl(api))
-                .tag(MD5Util.generate(api.requestURL()))
+                .tag(generateApiTag(api))
                 .post(requestBody)
                 .build();
     }
@@ -142,5 +156,16 @@ public abstract class OkHttpRequest extends AbstractRequestImpl {
         }
 
         return builder.build();
+    }
+
+    /**
+     * 针对每一个api的每次请求生成的tag
+     * 根据api具体参数不同tag是不一样的，即，同一个api可以有多个tag
+     *
+     * @param apiInterface api信息
+     * @return 此次请求的tag
+     */
+    private String generateApiTag(APIInterface apiInterface) {
+        return MD5Util.generate(apiInterface.requestURL() + apiInterface.requestParams().toString());
     }
 }
