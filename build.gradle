@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         minSdkVersion 10
@@ -22,10 +22,10 @@ dependencies {
     // compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // android support 包
-    compile 'com.android.support:support-v4:23.0.0'
-    compile 'com.android.support:appcompat-v7:23.0.0'
-    compile 'com.android.support:recyclerview-v7:23.0.0'
-    compile 'com.android.support:cardview-v7:23.0.0'
+    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.android.support:cardview-v7:23.0.1'
 
 
     // json 解析
@@ -45,6 +45,6 @@ dependencies {
 
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.1'
     compile 'de.greenrobot:eventbus:2.2.1'
-    compile 'com.facebook.fresco:fresco:0.6.1'
+    compile 'com.facebook.fresco:fresco:0.7.0'
 
 }

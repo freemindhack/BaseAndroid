@@ -25,7 +25,7 @@ public abstract class AbstractAsyncResponseImpl implements ResponseInterface {
     private Handler handler;
 
     public AbstractAsyncResponseImpl() {
-        log = new LogHandler();
+        log = LogHandler.getInstance();
         handler = new ResponderHandler(this, Looper.myLooper());
     }
 
