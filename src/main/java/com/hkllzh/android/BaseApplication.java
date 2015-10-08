@@ -6,6 +6,7 @@ import com.hkllzh.android.util.cache.ACache;
 import com.hkllzh.android.util.log.LogHandler;
 import com.hkllzh.android.util.log.LogInterface;
 import com.hkllzh.android.util.sharedpreferences.SPUtil;
+import com.hkllzh.android.util.toast.ToastUtil;
 
 /**
  * 基类Application
@@ -29,6 +30,8 @@ public abstract class BaseApplication extends Application {
         log = LogHandler.getInstance();
         log.setLoggingEnabled(getAppConfig().isShowLog);
         log.setLoggingLevel(getAppConfig().showLogLevel);
+
+        ToastUtil.init(this);
     }
 
     /**
