@@ -1,6 +1,7 @@
 package com.hkllzh.android.util.toast;
 
 import android.app.Application;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 /**
@@ -20,19 +21,59 @@ public class ToastUtil {
         mApp = application;
     }
 
+    /**
+     * 使用默认的{@link Toast}显示信息
+     *
+     * @param text 要显示的信息
+     */
     public static void show(String text) {
+        show(text, Toast.LENGTH_SHORT);
+    }
+
+    /**
+     * 使用默认的{@link Toast}显示信息
+     *
+     * @param textRid 要显示的信息
+     */
+    public static void show(@StringRes int textRid) {
+        show(textRid, Toast.LENGTH_SHORT);
+    }
+
+    /**
+     * 使用默认的{@link Toast}显示信息
+     *
+     * @param text     要显示的信息
+     * @param duration 信息显示时间  {@link Toast#LENGTH_SHORT} or {@link Toast#LENGTH_LONG}
+     */
+    public static void show(String text, int duration) {
+        checkNotNull();
         if (null == mToast) {
-            mToast = Toast.makeText(mApp, text, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(mApp, text, duration);
         }
         mToast.setText(text);
         mToast.show();
     }
 
-    public static void show(int textRid) {
+    /**
+     * 使用默认的{@link Toast}显示信息
+     *
+     * @param textRid  要显示的信息
+     * @param duration 信息显示时间  {@link Toast#LENGTH_SHORT} or {@link Toast#LENGTH_LONG}
+     */
+    public static void show(@StringRes int textRid, int duration) {
+        checkNotNull();
         if (null == mToast) {
-            mToast = Toast.makeText(mApp, textRid, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(mApp, textRid, duration);
         }
         mToast.setText(textRid);
         mToast.show();
     }
+
+    private static void checkNotNull() {
+        if (null == mApp) {
+            throw new IllegalArgumentException("context为空，请为此类进行初始化");
+        }
+    }
+
+
 }
