@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.StyleRes;
 import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,7 +25,7 @@ public abstract class BaseDialog extends Dialog {
      * @param context     C
      * @param layoutResId 布局文件
      */
-    public BaseDialog(Context context, int layoutResId) {
+    public BaseDialog(Context context, @LayoutRes int layoutResId) {
         super(context, R.style.BaseDialog);
         init(layoutResId);
     }
@@ -33,7 +35,7 @@ public abstract class BaseDialog extends Dialog {
      * @param layoutResId 布局文件
      * @param styleId     样式文件
      */
-    public BaseDialog(Context context, int layoutResId, int styleId) {
+    public BaseDialog(Context context, @LayoutRes int layoutResId, @StyleRes int styleId) {
         super(context, styleId);
         init(layoutResId);
     }
@@ -66,6 +68,7 @@ public abstract class BaseDialog extends Dialog {
      * @return 要显示的宽高的值
      */
     protected Point getW_H() {
+
         Point point = new Point();
         Display d = getWindow().getWindowManager().getDefaultDisplay();
 
