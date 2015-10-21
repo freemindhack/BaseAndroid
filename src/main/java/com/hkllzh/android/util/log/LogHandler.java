@@ -18,6 +18,25 @@ public class LogHandler implements LogInterface {
     private boolean mLoggingEnabled = true;
     private int mLoggingLevel = VERBOSE;
 
+    public static String LOG_PREFIX = "log_";
+    private static final int LOG_PREFIX_LENGTH = LOG_PREFIX.length();
+    private static final int MAX_LOG_TAG_LENGTH = 23;
+
+    public static String makeLogTag(String str) {
+        if (str.length() > MAX_LOG_TAG_LENGTH - LOG_PREFIX_LENGTH) {
+            return LOG_PREFIX + str.substring(0, MAX_LOG_TAG_LENGTH - LOG_PREFIX_LENGTH - 1);
+        }
+
+        return LOG_PREFIX + str;
+    }
+
+    /**
+     * Don't use this when obfuscating class names!
+     */
+    public static String makeLogTag(Class cls) {
+        return makeLogTag(cls.getSimpleName());
+    }
+
     @Override
     public boolean isLoggingEnabled() {
         return mLoggingEnabled;
@@ -93,7 +112,7 @@ public class LogHandler implements LogInterface {
 
     @Override
     public void d(String tag, String msg) {
-        log(VERBOSE, tag, msg);
+        log(DEBUG, tag, msg);
     }
 
     @Override

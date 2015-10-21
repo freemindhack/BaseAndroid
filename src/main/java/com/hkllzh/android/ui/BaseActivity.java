@@ -45,4 +45,12 @@ public class BaseActivity extends AppCompatActivity {
         W_PX = _W_PX;
         H_PX = _H_PX;
     }
+
+    protected static String makeLogTag(Class cls) {
+        return LogHandler.makeLogTag(cls);
+    }
+
+    protected static String makeLogTag(String str) {
+        return LogHandler.makeLogTag(str);
+    }
 }

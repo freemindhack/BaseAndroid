@@ -28,8 +28,10 @@ public abstract class BaseApplication extends Application {
         ACache.init(this);
         // 输出日志初始化
         log = LogHandler.getInstance();
+        LogHandler.LOG_PREFIX = getAppConfig().logPrefix;
         log.setLoggingEnabled(getAppConfig().isShowLog);
         log.setLoggingLevel(getAppConfig().showLogLevel);
+
 
         ToastUtil.init(this);
     }

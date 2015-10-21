@@ -28,6 +28,13 @@ public class AppConfig {
      */
     public int showLogLevel = LogInterface.VERBOSE;
 
+    /**
+     * 日志tag的前缀
+     * <br/>
+     * 默认为空
+     */
+    public String logPrefix = "";
+
     private AppConfig() {
     }
 
@@ -50,6 +57,14 @@ public class AppConfig {
 
         public Builder showLogLevel(int showLogLevel) {
             config.showLogLevel = showLogLevel;
+            return this;
+        }
+
+        /**
+         * 设置日志的tag前缀
+         */
+        public Builder setLogPrefix(String prefix) {
+            config.logPrefix = prefix;
             return this;
         }
 
