@@ -11,40 +11,42 @@ import com.hkllzh.android.util.sharedpreferences.SPUtil;
 
 /**
  * {@link android.app.Activity}的基类
- * <p/>
+ * <p>
  * lizheng -- 2015/08/10
- * <p/>
+ * <p>
  * BaseAndroid
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
-    private static final LogInterface _log;
-    private static final SPUtil _spUtil;
-    private static final int _W_PX;
-    private static final int _H_PX;
+    protected static final LogInterface log;
+    protected static final SPUtil spUtil;
+    protected static final int W_PX;
+    protected static final int H_PX;
 
     static {
-        _log = LogHandler.getInstance();
-        _spUtil = SPUtil.getInstance();
-        _W_PX = _spUtil.getInt(C.SP.SCREEN_WIDTH, 0);
-        _H_PX = _spUtil.getInt(C.SP.SCREEN_HEIGHT, 0);
+        log = LogHandler.getInstance();
+        spUtil = SPUtil.getInstance();
+        W_PX = spUtil.getInt(C.SP.SCREEN_WIDTH, 0);
+        H_PX = spUtil.getInt(C.SP.SCREEN_HEIGHT, 0);
     }
 
-    protected LogInterface log;
-    protected SPUtil spUtil;
-    protected int W_PX;
-    protected int H_PX;
     protected Activity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = this;
-        log = _log;
-        spUtil = _spUtil;
-        W_PX = _W_PX;
-        H_PX = _H_PX;
+        loadIntentData();
+        setContentView(getContentViewId());
+        initView();
     }
+
+    protected void loadIntentData() {
+    }
+
+    protected abstract int getContentViewId();
+
+    protected abstract void initView();
 
     protected static String makeLogTag(Class cls) {
         return LogHandler.makeLogTag(cls);

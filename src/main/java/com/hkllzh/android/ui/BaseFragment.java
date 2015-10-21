@@ -10,36 +10,27 @@ import com.hkllzh.android.util.sharedpreferences.SPUtil;
 
 /**
  * {@link Fragment}的基类
- * <p/>
+ * <p>
  * lizheng -- 2015/08/10
- * <p/>
+ * <p>
  * BaseAndroid
  */
 public class BaseFragment extends Fragment {
 
-    private static final LogInterface _log;
-    private static final SPUtil _spUtil;
-    private static final int _W_PX;
-    private static final int _H_PX;
+    protected static final LogInterface log;
+    protected static final SPUtil spUtil;
+    protected static final int W_PX;
+    protected static final int H_PX;
 
     static {
-        _log = LogHandler.getInstance();
-        _spUtil = SPUtil.getInstance();
-        _W_PX = _spUtil.getInt(C.SP.SCREEN_WIDTH, 0);
-        _H_PX = _spUtil.getInt(C.SP.SCREEN_HEIGHT, 0);
+        log = LogHandler.getInstance();
+        spUtil = SPUtil.getInstance();
+        W_PX = spUtil.getInt(C.SP.SCREEN_WIDTH, 0);
+        H_PX = spUtil.getInt(C.SP.SCREEN_HEIGHT, 0);
     }
-
-    protected LogInterface log;
-    protected SPUtil spUtil;
-    protected int W_PX;
-    protected int H_PX;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        log = _log;
-        spUtil = _spUtil;
-        W_PX = _W_PX;
-        H_PX = _H_PX;
     }
 }
