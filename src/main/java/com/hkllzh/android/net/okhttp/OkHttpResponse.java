@@ -1,5 +1,6 @@
 package com.hkllzh.android.net.okhttp;
 
+import com.hkllzh.android.net.APIInterface;
 import com.hkllzh.android.net.ResponseInterface;
 import com.hkllzh.android.net.impl.AbstractAsyncResponseImpl;
 import com.squareup.okhttp.OkHttpClient;
@@ -18,8 +19,9 @@ import java.io.IOException;
  */
 public class OkHttpResponse extends AbstractAsyncResponseImpl {
 
-    public OkHttpResponse(ResponseInterface responseInterface) {
-        super(responseInterface);
+
+    public OkHttpResponse(APIInterface apiInterface, ResponseInterface responseInterface) {
+        super(apiInterface, responseInterface);
     }
 
     public void onFailure(Request request, IOException e) {

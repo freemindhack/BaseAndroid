@@ -8,11 +8,11 @@ package com.hkllzh.android.net;
  * FastWeiB
  */
 public interface ResponseInterface {
-    void start();
+    void reqStart(APIInterface apiInterface);
 
-    void failed(String failedMessage);
+    void reqFailed(APIInterface apiInterface, String failedMessage);
 
-    void success(String response);
+    void reqSuccess(APIInterface apiInterface, String response);
 
-    void finish();
+    void reqFinish(APIInterface apiInterface);
 }

@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.hkllzh.android.net.APIInterface;
 import com.hkllzh.android.net.ResponseInterface;
 import com.hkllzh.android.util.log.LogHandler;
 
@@ -15,6 +16,7 @@ import com.hkllzh.android.util.log.LogHandler;
 public abstract class AbstractAsyncResponseImpl {// implements ResponseInterface {
 
     private ResponseInterface mResponseInterface;
+    private APIInterface mApi;
 
     private static final String LOG_TAG = "AbstractAsyncResponseImpl";
     private LogHandler log;
@@ -26,8 +28,9 @@ public abstract class AbstractAsyncResponseImpl {// implements ResponseInterface
 
     private Handler handler;
 
-    public AbstractAsyncResponseImpl(ResponseInterface responseInterface) {
+    public AbstractAsyncResponseImpl(APIInterface apiInterface, ResponseInterface responseInterface) {
         mResponseInterface = responseInterface;
+        mApi = apiInterface;
         log = LogHandler.getInstance();
         handler = new ResponderHandler(this, Looper.myLooper());
     }
@@ -77,17 +80,17 @@ public abstract class AbstractAsyncResponseImpl {// implements ResponseInterface
             switch (message.what) {
                 case SUCCESS_MESSAGE:
                     String success = (String) message.obj;
-                    mResponseInterface.success(success);
+                    mResponseInterface.reqSuccess(mApi, success);
                     break;
                 case FAILURE_MESSAGE:
                     String failedMessage = (String) message.obj;
-                    mResponseInterface.failed(failedMessage);
+                    mResponseInterface.reqFailed(mApi, failedMessage);
                     break;
                 case START_MESSAGE:
-                    mResponseInterface.start();
+                    mResponseInterface.reqStart(mApi);
                     break;
                 case FINISH_MESSAGE:
-                    mResponseInterface.finish();
+                    mResponseInterface.reqFinish(mApi);
                     break;
             }
         } catch (Throwable error) {
