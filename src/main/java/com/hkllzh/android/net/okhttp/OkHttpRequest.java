@@ -33,7 +33,7 @@ public abstract class OkHttpRequest extends AbstractRequestImpl {
 
     @Override
     public void execute(APIInterface api, ResponseInterface responseInterface) {
-        final OkHttpResponse okHttpResponse = (OkHttpResponse) responseInterface;
+        final OkHttpResponse okHttpResponse = new OkHttpResponse(responseInterface);
 
         okHttpResponse.sendStartMessage();
 
