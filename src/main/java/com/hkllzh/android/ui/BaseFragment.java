@@ -54,11 +54,11 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initView();
 
-    protected static String makeLogTag(Class cls) {
+    protected String makeLogTag(Class cls) {
         return LogHandler.makeLogTag(cls);
     }
 
-    protected static String makeLogTag(String str) {
+    protected String makeLogTag(String str) {
         return LogHandler.makeLogTag(str);
     }
 }
