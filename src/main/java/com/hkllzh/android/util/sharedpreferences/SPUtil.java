@@ -7,10 +7,10 @@ import android.text.TextUtils;
 
 /**
  * {@link android.content.SharedPreferences}的操作类
- * <p/>
+ * <p>
  * lizheng -- 15/1/15
- * <p/>
- * FastWeiB
+ * <p>
+ * BaseAndroid
  */
 public class SPUtil {
     private static Context mContext;
@@ -18,13 +18,12 @@ public class SPUtil {
     private SharedPreferences saveInfo;
     private SharedPreferences.Editor saveEditor;
 
-
     private SPUtil() {
         if (null == mContext) {
-            throw new NullPointerException("此类没有进行初始化");
+            throw new IllegalArgumentException("null == mContext 此类没有进行初始化");
         }
         if (TextUtils.isEmpty(mFileName)) {
-            throw new NullPointerException("此类没有进行初始化");
+            throw new IllegalArgumentException("null == mFileName || \"\" == mFileName 此类没有进行初始化");
         }
         saveInfo = mContext.getSharedPreferences(mFileName, Context.MODE_PRIVATE);
         saveEditor = saveInfo.edit();
