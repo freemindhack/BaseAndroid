@@ -4,10 +4,13 @@ import com.hkllzh.android.util.log.LogInterface;
 
 /**
  * 常量类
- * <p>
+ * <p/>
  * lizheng -- 2015/09/29
  */
-public class C {
+public final class C {
+    private C() {
+    }
+
     public static final class SP {
         // 屏幕宽（px）int
         public static final String SCREEN_WIDTH = "sp_screen_width";
