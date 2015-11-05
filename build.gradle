@@ -54,6 +54,8 @@ dependencies {
     // 图片加载库
     // compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.1'
     // compile 'com.facebook.fresco:fresco:0.7.0'
+    // 事件总线库
+    // compile 'de.greenrobot:eventbus:2.4.0'
 
 }
 
