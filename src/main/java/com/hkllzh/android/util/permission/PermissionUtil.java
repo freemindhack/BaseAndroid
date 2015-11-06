@@ -33,7 +33,7 @@ public class PermissionUtil {
      * <p>
      * 检查结果会回调至入参{@link android.app.Activity}页面的{@link Activity#onRequestPermissionsResult(int, String[], int[])}
      * <br/>
-     * 回调方法的requestCode为{@link com.hkllzh.weather.C.Permissions#LOCATION_REQUEST_CODE}
+     * 回调方法的requestCode为{@link com.hkllzh.android.C.Permissions#LOCATION_REQUEST_CODE}
      *
      * @param act 调用页面
      */
@@ -70,7 +70,7 @@ public class PermissionUtil {
      * <p>
      * 检查结果会回调至入参{@link android.app.Activity}页面的{@link Activity#onRequestPermissionsResult(int, String[], int[])}
      * <br/>
-     * 回调方法的requestCode为{@link com.hkllzh.weather.C.Permissions#STORAGE_REQUEST_CODE}
+     * 回调方法的requestCode为{@link com.hkllzh.android.C.Permissions#STORAGE_REQUEST_CODE}
      *
      * @param act 调用页面
      */
