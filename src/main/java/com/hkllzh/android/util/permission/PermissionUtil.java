@@ -8,7 +8,7 @@ import android.support.annotation.CheckResult;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
-import com.hkllzh.weather.C;
+import com.hkllzh.android.C;
 
 /**
  * 权限检查、申请工具类

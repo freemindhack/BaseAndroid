@@ -26,4 +26,11 @@ public final class C {
         public static boolean DEFAULT_IS_SHOW = true;
         public static int DEFAULT_LOG_LEVEL = LogInterface.VERBOSE;
     }
+
+    public final class Permissions {
+        // 申请定位权限 Manifest.permission.ACCESS_COARSE_LOCATION
+        public static final int LOCATION_REQUEST_CODE = 1000;
+        // 申请sd卡权限 Manifest.permission.WRITE_EXTERNAL_STORAGE
+        public static final int STORAGE_REQUEST_CODE = 2000;
+    }
 }
