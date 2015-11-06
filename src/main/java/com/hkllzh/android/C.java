@@ -29,8 +29,8 @@ public final class C {
 
     public final class Permissions {
         // 申请定位权限 Manifest.permission.ACCESS_COARSE_LOCATION
-        public static final int LOCATION_REQUEST_CODE = 1000;
+        public static final int LOCATION_REQUEST_CODE = 100;
         // 申请sd卡权限 Manifest.permission.WRITE_EXTERNAL_STORAGE
-        public static final int STORAGE_REQUEST_CODE = 2000;
+        public static final int STORAGE_REQUEST_CODE = 101;
     }
 }
